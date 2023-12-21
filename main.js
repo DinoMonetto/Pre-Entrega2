@@ -1,5 +1,5 @@
 const juegoAhorcado = {
-    palabras: ["rulo", "diecinueve", "ahorcado", "ganar", "perro", "gato", "dificil", "juego"],
+    palabras: ["rulo", "diecinueve", "ahorcado", "ganar", "perro", "gato", "dificil", "juego"], // posibles palabras
     palabraSeleccionada: "",
     letrasUtilizadas: [],
     intentosRestantes: 5,
@@ -10,7 +10,7 @@ const juegoAhorcado = {
     },
 
     mostrarPalabra() {
-        const palabraMostrada = this.palabraSeleccionada.split('').map(char => {
+        const palabraMostrada = this.palabraSeleccionada.split('').map(char => { //con split divido la palabra y con map trasforomo cada caracter y por ultimo con join uno todo
             return this.letrasUtilizadas.includes(char) ? char : "_"
         }).join(" ")
         alert("Palabra: " + palabraMostrada)
@@ -24,11 +24,11 @@ const juegoAhorcado = {
     comprobarLetra() {
         let letra = ""
         
-        // Si hay mas de una letra, sigue pidiendo una entrada.
+        // Si hay mas de una letra, se sigue pidiendo una entrada
         while (letra.length !== 1) {
             letra = prompt("Introduce una letra:").toLowerCase()
     
-            // Verifica si se canceló el prompt o se cerró, si es así, termina.
+            // si se canceló el prompt o se cerro, se termina.
             if (letra === null) return
     
             if (letra.length !== 1) {
@@ -42,15 +42,15 @@ const juegoAhorcado = {
             return
         }
     
-        this.letrasUtilizadas.push(letra);
+        this.letrasUtilizadas.push(letra) // para llevar un registro de las letras que se han intentado
     
         if (!this.palabraSeleccionada.includes(letra)) {
-            this.intentosRestantes--
-            alert("Incorrecto, '" + letra + "' no está en la palabra.")
+            this.intentosRestantes-- // se reduce en 1 los intentos 
+            alert("Incorrecto, " + letra + " no está en la palabra.")
             alert("Letras utilizadas: " + this.letrasUtilizadas.join(", ") + "\nIntentos restantes: " + this.intentosRestantes)
             
-            if (this.intentosRestantes === 0) {
-                alert("¡Perdiste! La palabra era: " + this.palabraSeleccionada)
+            if (this.intentosRestantes === 0) { //si se llega a 0 intentos se reinicia 
+                alert("Perdiste! La palabra era: " + this.palabraSeleccionada)
                 this.reiniciarJuego()
             } else {
                 this.mostrarPalabra()
@@ -77,9 +77,9 @@ const juegoAhorcado = {
 
 console.log("Lista de palabras disponibles:", juegoAhorcado.palabras);
 
-// Mostrar un mensaje de bienvenida cuando la página se cargue
+// es un mensaje de bienvenida cuando cargue la pagina
 window.onload = () => {
-    alert("Bienvenido al juego del ahorcado. ¡Comienza a adivinar la palabra!")
+    alert("Bienvenido al juego del ahorcado. Adivina la palabra!")
     juegoAhorcado.inicializar()
     while (juegoAhorcado.intentosRestantes > 0) {
         juegoAhorcado.comprobarLetra()
